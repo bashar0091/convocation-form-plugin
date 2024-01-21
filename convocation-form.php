@@ -20,7 +20,23 @@ defined('ABSPATH') || exit;
 require_once 'vendor/autoload.php';
 
 /**
- * Require All Admin JS Files Here
+ * Require All CSS, JS Files Here
+ */
+function form_enqueue_scripts() {
+
+    // css file 
+    wp_enqueue_style('customd-style', plugin_dir_url(__FILE__) . 'assets/css/custom.css', false, '1.0.0', '');
+
+    // js file 
+    wp_enqueue_script('custom-script', plugin_dir_url(__FILE__) . 'assets/js/custom.js', array('jquery'), '1.0.0', true);
+
+    // Ajax Request URL
+    wp_localize_script('custom-script', 'formAjax', array('ajaxurl' => admin_url('admin-ajax.php')));
+}
+add_action('wp_enqueue_scripts', 'form_enqueue_scripts');
+
+/**
+ * Require All Admin CSS, JS Files Here
  */
 function admin_enqueue_scripts() {
 
@@ -37,6 +53,8 @@ add_action('admin_enqueue_scripts', 'admin_enqueue_scripts');
  * Require All Include Files Here
  */
 require_once plugin_dir_path(__FILE__) . 'shortcode/registration-form.php';
+require_once plugin_dir_path(__FILE__) . 'shortcode/payment-status-form.php';
 require_once plugin_dir_path(__FILE__) . 'admin/new-menu.php';
 require_once plugin_dir_path(__FILE__) . 'includes/excel-submission.php';
+require_once plugin_dir_path(__FILE__) . 'includes/payment-status-form-ajaxHandler.php';
 require_once plugin_dir_path(__FILE__) . 'database/new-table.php';

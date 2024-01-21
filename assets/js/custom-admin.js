@@ -11,8 +11,6 @@ jQuery(document).ready(function($){
         }
     });
 
-    
-
 });
 
 // data table

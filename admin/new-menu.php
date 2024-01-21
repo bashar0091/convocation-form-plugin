@@ -42,17 +42,46 @@ function convocation_page_content() {
         </form>
         
         <br><br><br>
+        <h3>All Convocation List</h3>
+        <?php 
+            $registered_convocation = get_option('registered_convocation');
+
+            if($registered_convocation) {
+                $registered_convocation_th = $registered_convocation[0];
+            }
+        ?>
         <table id="registered_convocation" class="display">
             <thead>
                 <tr>
-                    <th>#ID</th>
-                    <th>Student Name</th>
-                    <th>Student Email</th>
-                    <th>Program</th>
-                    <th>Submission Date</th>
-                    <th>Action</th>
+                    <?php
+                        if($registered_convocation) {
+                            foreach($registered_convocation_th as $key => $convocation_th) {
+                                if (in_array($key, [0, 1, 2, 3, 4, 5, 6, 9, 13, 14, 23, 24])) {
+                                    echo '<th>' . $convocation_th . '</th>';
+                                }
+                            }
+                        }
+                    ?>
                 </tr>
             </thead>
+
+            <tbody>
+                <?php 
+                    if($registered_convocation) {
+                        foreach($registered_convocation as $key => $convocation) { 
+                            if (!in_array($key, [0])) {
+                                echo '<tr>';
+                                    foreach($convocation as $key => $convocation_td) { 
+                                        if (in_array($key, [0, 1, 2, 3, 4, 5, 6, 9, 13, 14, 23, 24])) {
+                                            echo '<td>' . $convocation_td . '</td>';
+                                        }
+                                    }
+                                echo '</tr>';
+                            }
+                        }
+                    }
+                ?>
+            </tbody>
         </table>
     </div>
     <?php
