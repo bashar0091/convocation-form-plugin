@@ -15,3 +15,10 @@ jQuery(document).ready(function($){
 
 // data table
 jQuery("#registered_convocation").DataTable();
+
+
+// Export Table As Excel
+var table2excel = new Table2Excel();
+document.getElementById('export_excel').addEventListener('click', function() {
+table2excel.export(document.querySelectorAll('table'));
+});

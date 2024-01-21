@@ -318,38 +318,85 @@ $output .= '
                         </select>
                     </div>
                 </div>
+
                 <div class="elementor-field-type-radio elementor-field-group elementor-column elementor-field-group-field_560b9b8 elementor-col-100 elementor-field-required">
                     <label for="form-field-field_560b9b8" class="elementor-field-label"> Will any guests accompany with you? (Maximum 2 persons) </label>
-                    <div class="elementor-field-subgroup">
+                    <div id="guest_condition_change" class="elementor-field-subgroup">
                         <span class="elementor-field-option">
-                            <input type="radio" value="YES" id="form-field-field_560b9b8-0" name="form_fields[field_560b9b8]" required="required"  /> <label for="form-field-field_560b9b8-0">YES</label>
+                            <input type="radio" value="yes" id="form-field-field_560b9b8-0" name="guest_condition" required="required"  /> <label for="form-field-field_560b9b8-0">YES</label>
                         </span>
                         <span class="elementor-field-option">
-                            <input type="radio" value="No" id="form-field-field_560b9b8-1" name="form_fields[field_560b9b8]" required="required"  /> <label for="form-field-field_560b9b8-1">No</label>
+                            <input type="radio" checked value="no" id="form-field-field_560b9b8-1" name="guest_condition" required="required"  /> <label for="form-field-field_560b9b8-1">No</label>
                         </span>
+
+                        <div class="additional_field">
+                            <div class="elementor-field-subgroup">
+                                <input size="1" type="text" name="person1" id="person1" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="1st Accompanying Person Name:">
+                                <label class="elementor-field-label">Relation with accompanying person: </label>
+                                <span class="elementor-field-option">
+                                    <input type="radio" checked value="Father" name="guest_condition_value1" id="father1" /> <label for="father1">Father</label>
+                                    <input type="radio" value="Mother" name="guest_condition_value1" id="mother1" /> <label for="mother1">Mother</label>
+                                    <input type="radio" value="Spouse" name="guest_condition_value1" id="spouse1" /> <label for="spouse1">Spouse</label>
+                                </span>
+                            </div>
+                            <div class="elementor-field-subgroup">
+                                <input size="1" type="text" name="person2" id="person2" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="2nd Accompanying Person Name:">
+                                <label class="elementor-field-label">Relation with accompanying person: </label>
+                                <span class="elementor-field-option">
+                                    <input type="radio" value="Father" name="guest_condition_value2" id="father2" /> <label for="father2">Father</label>
+                                    <input type="radio" checked value="Mother" name="guest_condition_value2" id="mother2" /> <label for="mother2">Mother</label>
+                                    <input type="radio" value="Spouse" name="guest_condition_value2" id="spouse2" /> <label for="spouse2">Spouse</label>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="elementor-field-type-radio elementor-field-group elementor-column elementor-field-group-field_e478877 elementor-col-100 elementor-field-required">
                     <label for="form-field-field_e478877" class="elementor-field-label"> Have you taken the certificate? </label>
-                    <div class="elementor-field-subgroup">
+                    <div id="certificate_condition_change" class="elementor-field-subgroup">
                         <span class="elementor-field-option">
-                            <input type="radio" value="YES" id="form-field-field_e478877-0" name="form_fields[field_e478877]" required="required"  /> <label for="form-field-field_e478877-0">YES</label>
+                            <input type="radio" value="yes" id="form-field-field_e478877-0" name="certificate_condition" required="required"  /> <label for="form-field-field_e478877-0">YES</label>
                         </span>
                         <span class="elementor-field-option">
-                            <input type="radio" value="No" id="form-field-field_e478877-1" name="form_fields[field_e478877]" required="required"  /> <label for="form-field-field_e478877-1">No</label>
+                            <input type="radio" checked value="no" id="form-field-field_e478877-1" name="certificate_condition" required="required"  /> <label for="form-field-field_e478877-1">No</label>
                         </span>
+
+                        <div class="additional_field">
+                            <div class="elementor-field-subgroup additional_field_guest">
+                                <span class="elementor-field-option">
+                                    <input type="radio" checked value="Original Certificate" name="certificate_condition_value" id="original_certificate" /> <label for="original_certificate">Original Certificate</label>
+                                </span>
+                                <span class="elementor-field-option">
+                                    <input type="radio" value="Original Certificate+Transcript" name="certificate_condition_value" id="original_Certificate_transcript" /> <label for="original_Certificate_transcript">Original Certificate+Transcript</label>
+                                </span>
+                                <span class="elementor-field-option">
+                                    <input type="radio" value="Provisional Certificate" name="certificate_condition_value" id="provisional_certificate" /> <label for="provisional_certificate">Provisional Certificate</label>
+                                </span>
+                                <span class="elementor-field-option">
+                                    <input type="radio" value="Provisional Certificate+Transcript" name="certificate_condition_value" id="provisional_certificate_transcript" /> <label for="provisional_certificate_transcript">Provisional Certificate+Transcript</label>
+                                </span>
+                                <span class="elementor-field-option">
+                                    <input type="radio" value="Only Transcript" name="certificate_condition_value" id="only_transcript" /> <label for="only_transcript">Only Transcript</label>
+                                </span>
+                                <span class="elementor-field-option">
+                                    <input type="radio" value="N/A" name="certificate_condition_value" id="na" /> <label for="na">N/A</label>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="elementor-field-type-upload elementor-field-group elementor-column elementor-field-group-field_1d51885 elementor-col-100 elementor-field-required">
-                    <label for="form-field-field_1d51885" class="elementor-field-label"> Upload your recent photo </label>
-                    <input type="file" name="form_fields[field_1d51885]" id="form-field-field_1d51885" class="elementor-field elementor-size-sm elementor-upload-field" required="required"  />
+                    <label for="image_upload" class="elementor-field-label"> Upload your recent photo </label>
+                    <input type="file" name="" id="image_upload" class="elementor-field elementor-size-sm elementor-upload-field" required="required"  />
+                    <span class="spinner"></span>
+                    <input type="hidden" name="uploaded_photo" id="uploaded_photo" value="" required />
                 </div>
                 <div class="elementor-field-type-text elementor-field-group elementor-column elementor-field-group-field_c643adc elementor-col-100 elementor-field-required">
                     <label for="form-field-field_c643adc" class="elementor-field-label"> Amount </label>
-                    <input size="1" type="text" name="form_fields[field_c643adc]" id="form-field-field_c643adc" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Tk" required="required"  />
+                    <input size="1" type="number" name="amount" id="form-field-field_c643adc" class="elementor-field elementor-size-sm elementor-field-textual" placeholder="Tk" required="required"  />
                 </div>
                 <div class="elementor-field-group elementor-column elementor-field-type-submit elementor-col-100">
-                    <button type="submit" class="elementor-button elementor-size-sm">
+                    <button type="submit" name="make_payment" class="elementor-button elementor-size-sm">
                         <span class="elementor-button-text">Pay Now</span>
                     </button>
                 </div>

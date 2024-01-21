@@ -46,3 +46,15 @@
 .d_none {
     display: none !important;
 }
+.additional_field {
+    margin: 20px;
+    margin-right: 0;
+    display: none;
+}
+.additional_field input[type="text"] {
+    margin: 10px 0;
+}
+.additional_field .additional_field_guest {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

@@ -45,6 +45,7 @@ function admin_enqueue_scripts() {
 
     // js file 
     wp_enqueue_script('jquery-dataTables-script', 'https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js', array('jquery'), '1.0.0', true);
+    wp_enqueue_script('table2excel-script', plugin_dir_url(__FILE__) . 'assets/js/table2excel.js', array('jquery'), '1.0.0', true);
     wp_enqueue_script('custom-admin-script', plugin_dir_url(__FILE__) . 'assets/js/custom-admin.js', array('jquery'), '1.0.0', true);
 }
 add_action('admin_enqueue_scripts', 'admin_enqueue_scripts');
@@ -57,4 +58,48 @@ require_once plugin_dir_path(__FILE__) . 'shortcode/payment-status-form.php';
 require_once plugin_dir_path(__FILE__) . 'admin/new-menu.php';
 require_once plugin_dir_path(__FILE__) . 'includes/excel-submission.php';
 require_once plugin_dir_path(__FILE__) . 'includes/payment-status-form-ajaxHandler.php';
+require_once plugin_dir_path(__FILE__) . 'includes/form-submit-session-store.php';
+require_once plugin_dir_path(__FILE__) . 'includes/form-submit-store-db.php';
+require_once plugin_dir_path(__FILE__) . 'includes/filer_uploader_ajax.php';
 require_once plugin_dir_path(__FILE__) . 'database/new-table.php';
+
+
+/**
+ * 
+ * One Product Cart Item
+ * 
+ */
+add_filter('woocommerce_add_cart_item_data', 'restrict_single_product_to_cart', 10, 3);
+function restrict_single_product_to_cart($cart_item_data, $product_id, $variation_id) {
+    WC()->cart->empty_cart();
+
+    return $cart_item_data;
+}
+
+/**
+ * 
+ * // Function to form_payment_field_register customizer settings
+ * 
+ */
+function form_payment_field_register($wp_customize) {
+    // Add a section
+    $wp_customize->add_section('form_payment_field', array(
+        'title' => __('Form Payment Field', 'epfwoo'),
+        'priority' => 30,
+    ));
+
+    // Add a setting
+    $wp_customize->add_setting('form_payment_id', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    // Add a control
+    $wp_customize->add_control('form_id_control', array(
+        'label' => __('Payment Id', 'epfwoo'),
+        'section' => 'form_payment_field',
+        'settings' => 'form_payment_id',
+        'type' => 'number',
+    ));
+}
+add_action('customize_register', 'form_payment_field_register');

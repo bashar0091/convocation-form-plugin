@@ -92,8 +92,90 @@ function new_submission_page_content() {
     ?>
     <div class="wrap">
         <h2>New Submission</h2>
-        <!-- Your custom content for New Submission goes here -->
-        <p>basg</p>
+
+        <br><br><br>
+        
+        <h3>All Submission List</h3>
+
+        <?php 
+            global $wpdb;
+
+            $table_name = $wpdb->prefix . 'convocation_register';
+            $results = $wpdb->get_results(
+                "SELECT id, submission_data, submit_date FROM $table_name",
+                ARRAY_A 
+            ); 
+        ?>
+        <div style="overflow-x:auto">
+
+            <button id="export_excel" class="woocommerce-BlankState-cta button-primary button">Export to excel</button>
+
+            <br><br>
+
+            <table id="registered_convocation" class="display" data-excel-name="New Submission">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Programm</th>
+                        <th>ID number</th>
+                        <th>Admission Session</th>
+                        <th>Guests</th>
+                        <th>Person 1 Name</th>
+                        <th>Person 1 Relation</th>
+                        <th>Person 2 Name</th>
+                        <th>Person 2 Relation</th>
+                        <th>Certificate Taken</th>
+                        <th>Certificate Name</th>
+                        <th>Photo</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php
+                        foreach ($results as $result) {
+
+                            $submission_data = json_decode($result['submission_data'], true);
+
+                            $guest_condition = $submission_data['guest_condition'];
+                            $certificate_condition = $submission_data['certificate_condition'];
+                            $uploaded_photo = $submission_data['uploaded_photo'];
+                            echo '<tr>';
+                                echo '
+                                    <td>'.$result['id'].'</td>
+                                    <td>'.$submission_data['name'].'</td>
+                                    <td>'.$submission_data['email'].'</td>
+                                    <td>'.$submission_data['phone'].'</td>
+                                    <td>'.$submission_data['program'].'</td>
+                                    <td>'.$submission_data['id_number'].'</td>
+                                    <td>'.$submission_data['admission_session'].'</td>
+                                    <td>'.$submission_data['guest_condition'].'</td>
+
+                                    <td>'.($guest_condition == 'yes' ? $submission_data['person1'] : "").'</td>
+                                    <td>'.($guest_condition == 'yes' ? $submission_data['guest_condition_value1'] : "").'</td>
+                                    <td>'.($guest_condition == 'yes' ? $submission_data['person2'] : "").'</td>
+                                    <td>'.($guest_condition == 'yes' ? $submission_data['guest_condition_value2'] : "").'</td>
+
+                                    <td>'.$submission_data['certificate_condition'].'</td>
+                                    <td>'.($certificate_condition == 'yes' ? $submission_data['certificate_condition_value'] : "").'</td>
+                                    <td>
+                                        <img src="'.(!empty($uploaded_photo) ? $uploaded_photo : '').'" alt="photo" width="50px"/>
+                                    </td>
+                                    <td>'.$submission_data['amount'].'</td>
+                                    <td>'.$result['submit_date'].'</td>
+                                ';
+                            echo '</tr>';
+
+                        }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+        
     </div>
     <?php
 }
